@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"math"
+	"math/rand"
 	"sync"
 	"time"
 )
@@ -38,12 +38,25 @@ func wait2() {
 }
 
 func waitForAll() {
-	defer boss.Done()
 	wait1()
 	wait2()
+	boss.Wait()
 	fmt.Println("All WORK DONE!")
 }
 
 func main() {
+	supervisor1.Add(3)
+	for i:=0; i<3; i++{
+		go doWork1()
+	}
 
+	supervisor2.Add(3)
+	for i:=0; i<3; i++ {
+		go doWork2()
+	}
+
+	boss.Add(2)
+	waitForAll()
+
+	fmt.Println("Project Over!")
 }
