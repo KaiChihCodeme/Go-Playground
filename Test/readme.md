@@ -12,6 +12,10 @@ go test
 ```
 ![result of go test](img/image1.png)
 
+If we want to test specific file:
+```
+go test mathCalculate.go mathCalculate_test.go
+```
 
 ## Test Code
 ```
